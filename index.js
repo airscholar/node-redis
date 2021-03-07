@@ -16,6 +16,7 @@ const port = 3000;
 //init app
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 //view engine
 app.engine('handlebars', handlerbars({ defaultLayout: 'main' }));
@@ -31,9 +32,10 @@ app.get('/', function (req, res, next) {
 
 //search processing
 app.post('/user/search', (req, res, next) => {
-  let { id } = req.body;
-
-  client.hgetall(id, (err, obj) => {
+  let id = req.body.id;
+  console.log(id);
+  client.hgetall(id, function (err, obj) {
+    console.log(obj);
     if (!obj) {
       res.render('searchusers', {
         error: 'User does not exist',
