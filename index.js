@@ -84,7 +84,7 @@ app.post('/user/add', function (req, res, obj) {
 
 //add user page
 app.delete('/user/delete/:id', function (req, res, next) {
-    client.del(req.params.id);
+    client.del(req.params.id); 
 
     res.redirect('/');
   });
